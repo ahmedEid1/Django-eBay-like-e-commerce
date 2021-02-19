@@ -10,7 +10,17 @@
   - 
   - ##### my models :
     - Category (name)
-    - Listing (owner, title, description, starting_bid, image, category)
+    - Listing (owner, title, description, starting_bid, image, category, active)
     - Bid (owner, listing, price)
     - Comment (author, listing, content, date_created)
 ----
+- Create Listing: 
+  - Users should be able to visit a page to create a new listing. They should be able to specify a title for the listing, a text-based description, and what the starting bid should be. Users should also optionally be able to provide a URL for an image for the listing and/or a category (e.g. Fashion, Toys, Electronics, Home, etc.).
+![create form](readme_media/listing_create_form.PNG)
+
+---
+- Active Listings Page: 
+  - The default route of your web application should let users view all the currently active auction listings. For each active listing, this page should display (at minimum) the title, description, current price, and photo (if one exists for the listing).
+![listings](readme_media/listings.PNG)
+    
+---

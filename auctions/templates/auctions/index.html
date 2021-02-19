@@ -3,5 +3,36 @@
 {% block body %}
     <h2>Active Listings</h2>
 
-    TODO
+    {% for listing in listings %}
+        <div class="col-4 d-inline-block">
+        <div class="card">
+            <div class="card-body">
+            <h3 class="card-title">{{ listing.title }}</h3>
+            <p>Owned by: {{ listing.owner.username }}</p>
+            <p class="card-text">
+                <b>Description: </b>
+                {{ listing.description }}
+            </p>
+            <p>
+                <b>Current Price:</b>
+                {% if listing.bids.count != 0 %}
+                    {{ listing.bids.first.price}}
+
+                {% else %}
+                    {{ listing.starting_bid }}
+                {% endif %}
+                $
+            </p>
+
+            {% if listing.image %}
+                <img src="{{ listing.image.url }}" alt="listing photo" width="30%">
+            {% endif %}
+
+            </div>
+        </div>
+        </div>
+
+    {% empty %}
+        There are no active listings right now.
+    {% endfor %}
 {% endblock %}
