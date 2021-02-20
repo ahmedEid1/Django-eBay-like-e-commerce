@@ -13,5 +13,7 @@ urlpatterns = [
     path("listing/comment/<int:pk>", views.comment, name='comment'),
     path("listing/watch/<int:pk>", views.watch_list, name='watch_list'),
     path("listing/watch/stop/<int:pk>", views.stop_watch, name='stop_watch'),
-
+    path("watchlist", views.show_watch_list, name='show_watch_list'),
+    path("categories", views.show_categories, name='show_categories'),
+    path("category/<int:pk>", views.show_category_listing, name='show_category_listing'),
 ]

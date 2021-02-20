@@ -47,6 +47,10 @@
                 $
             </p>
 
+            <p>
+                <b>Category: </b>{{ listing.category.name }}
+            </p>
+
             {% if listing.image %}
                 <img src="{{ listing.image.url }}" alt="listing photo" width="40%">
             {% endif %}

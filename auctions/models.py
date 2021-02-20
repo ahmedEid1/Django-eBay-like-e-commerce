@@ -22,7 +22,7 @@ class Listing(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="listings", blank=True, null=True)
     active = models.BooleanField(default=True)
     winner = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="wins", null=True, blank=True)
-    watchers = models.ManyToManyField(User, related_name='watch_list')
+    watchers = models.ManyToManyField(User, related_name='watch_list', null=True, blank=True)
 
     def __str__(self):
         return self.title + "is owner by " + self.owner.username

@@ -43,3 +43,16 @@
     - If the user is signed in, the user should be able to add the item to their “Watchlist.” If the item is already on the watchlist, the user should be able to remove it.
 ![add](readme_media/add.PNG)
 ![remove](readme_media/remove.PNG)
+      
+----
+- Watchlist: 
+    - Users who are signed in should be able to visit a Watchlist page, which should display all of the listings that a user has added to their watchlist. Clicking on any of those listings should take the user to that listing’s page.
+![Watch List](readme_media/watchlist.PNG)
+
+---
+- Categories: 
+  - Users should be able to visit a page that displays a list of all listing categories. Clicking on the name of any category should take the user to a page that displays all of the active listings in that category.
+![categories](readme_media/categories.PNG)
+![category](readme_media/category.PNG)
+
+---

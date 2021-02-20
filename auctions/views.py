@@ -78,8 +78,7 @@ def create_listing(request):
             if data['category'] is not None:
                 listing.category = data['category']
             listing.save()
-            # TODO :: redirect to listing page
-            return HttpResponse(Listing.objects.get(pk=1))
+            return HttpResponseRedirect(reverse('listing_view', args=[listing.id]))
         else:
             return render(request, 'auctions/listing/create.html', {'form': form})
 
@@ -149,3 +148,15 @@ def stop_watch(request, pk):
         Listing.objects.get(pk=pk).watchers.remove(request.user)
 
     return HttpResponseRedirect(reverse('listing_view', args=[pk]))
+
+
+def show_watch_list(request):
+    return render(request, "auctions/listing/watchlist.html", {'listings': request.user.watch_list.all()})
+
+
+def show_categories(request):
+    return render(request, "auctions/categories.html", {'categories': Category.objects.all()})
+
+
+def show_category_listing(request, pk):
+    return render(request, "auctions/category.html", {'category': Category.objects.get(pk=pk)})
