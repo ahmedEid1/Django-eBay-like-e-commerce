@@ -1,0 +1,107 @@
+{% extends 'auctions/layout.html' %}
+
+{% load crispy_forms_field %}
+
+{% block title %}
+    {{ listing.title }}
+{% endblock %}
+
+
+{% block body %}
+    {% if user.is_authenticated and listing.owner == user %}
+        <div  style="padding: 10px">
+            <form method="post" action="{% url "close_listing" listing.id %}">
+                {% csrf_token %}
+                <button class="btn btn-secondary">Close Listing</button>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if user.is_authenticated and listing.winner == user %}
+        <div class="alert alert-success" style="padding: 10px">
+           You have won this Listing
+        </div>
+    {% endif %}
+
+
+    <div class="col-6 d-inline-block">
+        <div class="card">
+            <div class="card-body">
+
+                <a href="{% url 'listing_view' listing.id %}">
+                    <h3 class="card-title">{{ listing.title }}</h3>
+                </a>
+            <p>Owned by: {{ listing.owner.username }}</p>
+            <p class="card-text">
+                <b>Description: </b>
+                {{ listing.description }}
+            </p>
+            <p>
+                <b>Current Price:</b>
+                {% if listing.bids.count != 0 %}
+                    {{ listing.bids.first.price}}
+
+                {% else %}
+                    {{ listing.starting_bid }}
+                {% endif %}
+                $
+            </p>
+
+            {% if listing.image %}
+                <img src="{{ listing.image.url }}" alt="listing photo" width="40%">
+            {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated and listing.active %}
+        <div class="col-2 d-inline-block">
+            {% if user not in listing.watchers.all %}
+                <form method="post" action="{% url 'watch_list' listing.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-success">Add to WatchList</button>
+                </form>
+            {% else %}
+                <form method="post" action="{% url 'stop_watch' listing.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">Remove from WatchList</button>
+                </form>
+            {% endif %}
+        </div>
+
+        <div class="col-3 d-inline-block">
+            <form method="post">
+                {% csrf_token %}
+                {{ biding_form }}
+                <button class="btn btn-primary">add a bid </button>
+            </form>
+        </div>
+    {% endif %}
+
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+                <h1 style="padding: 10px">Comments</h1>
+                {% for comment in listing.comments.all %}
+                <div class="comment mt-4 text-justify float-left">
+                    <h4>{{ comment.author.username }}</h4> <span>{{ comment.date_created }}</span> <br>
+                    <p>{{ comment.content }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% if user.is_authenticated %}
+            <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                <form id="algin-form" method="post" action="{% url 'comment' listing.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h4>Leave a comment</h4> <label for="content">Message</label> <textarea name="content" id="" msg cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group"> <button class="btn btn-primary">Post Comment</button> </div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        </div>
+
+{% endblock %}

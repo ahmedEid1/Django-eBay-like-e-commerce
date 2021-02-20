@@ -7,7 +7,10 @@
         <div class="col-4 d-inline-block">
         <div class="card">
             <div class="card-body">
-            <h3 class="card-title">{{ listing.title }}</h3>
+
+                <a href="{% url 'listing_view' listing.id %}">
+                    <h3 class="card-title">{{ listing.title }}</h3>
+                </a>
             <p>Owned by: {{ listing.owner.username }}</p>
             <p class="card-text">
                 <b>Description: </b>

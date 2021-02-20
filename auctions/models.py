@@ -21,6 +21,8 @@ class Listing(models.Model):
     image = models.ImageField(upload_to="listing/images", blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="listings", blank=True, null=True)
     active = models.BooleanField(default=True)
+    winner = models.ForeignKey(User, on_delete=models.SET_NULL, related_name="wins", null=True, blank=True)
+    watchers = models.ManyToManyField(User, related_name='watch_list')
 
     def __str__(self):
         return self.title + "is owner by " + self.owner.username
