@@ -1,5 +1,3 @@
-- create the watchList :
-    - it is a cart so look for the cart built in the book
 ## My Tasks
 - Django Admin Interface: 
   - Via the Django admin interface, a site administrator should be able to view, add, edit, and delete any listings, comments, and bids made on the site.
